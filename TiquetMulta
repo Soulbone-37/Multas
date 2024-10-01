@@ -1,0 +1,47 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package main;
+
+/**
+ *
+ * @author saith
+ */
+public class TiquetMulta {
+
+    private carroParqueado carro;
+    private Parquimetro parqui;
+    private int multa;
+    private String nombreOficial;
+    private String placaOficial;
+
+    public TiquetMulta(carroParqueado carro, String nombreOficial, String placaOficial, Parquimetro parqui) {
+        this.carro = carro;
+        this.nombreOficial = nombreOficial;
+        this.placaOficial = placaOficial;
+        this.parqui = parqui;
+        this.multa = calcularMulta(carro.getMinutosParqueado(), parqui.getMinutosPagados());
+    }
+
+    private int calcularMulta(int minutosParqueado, int minutosPagados) {
+        int minutosExcedidos = minutosParqueado - minutosPagados;
+        if (minutosExcedidos <= 0) {
+            return 0;
+        } 
+        double horasExcedidas = minutosExcedidos / 60.0;
+        int horasFinales = (int) Math.ceil(horasExcedidas);
+        int horassuperFinales = (horasFinales-1) * 10000;
+        return 25000 + horassuperFinales;
+    }
+
+    @Override
+    public String toString() {
+        return "TiquetMulta{" + "carro=" + carro + ", multa=" + multa + ", nombreOficial=" + nombreOficial + ", placaOficial=" + placaOficial + '}';
+    }
+
+    
+    
+    
+
+}
