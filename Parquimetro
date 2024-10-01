@@ -1,0 +1,27 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package main;
+
+/**
+ *
+ * @author saith
+ */
+public class Parquimetro {
+    
+    private int minutosPagados;
+    
+    public Parquimetro (int minutosPagados){
+        this.minutosPagados = minutosPagados;
+    }
+    
+    public int getMinutosPagados(){return minutosPagados;}
+
+    @Override
+    public String toString() {
+        return "Parquimetro{" + "minutosPagados=" + minutosPagados + '}';
+    }
+    
+    
+}
