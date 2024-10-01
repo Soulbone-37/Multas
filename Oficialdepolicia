@@ -1,0 +1,91 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package main;
+import java.util.Scanner;
+/**
+ *
+ * @author saith
+ */
+public class OficialdePolicia {
+    carroParqueado carro;
+    Parquimetro parquimetro;
+    private String nombre;
+    private String placa;
+    int minutosParqueado;
+    int minutosPagados;
+    
+    public OficialdePolicia (String nombre, String placa) {
+        this.nombre = nombre;
+        this.placa = placa;
+    }
+    
+    public void revisarCarro(carroParqueado carro, Parquimetro parquimetro) {
+        if (carro.getMinutosParqueado() > parquimetro.getMinutosPagados()) {
+            TiquetMulta tiquet = new TiquetMulta(carro, nombre, placa, parquimetro);
+            System.out.println(tiquet);
+        } else {
+            System.out.println("El carro esta dentro del tiempo permitido :)");
+        }
+    }
+    
+    public void setMinutosParqueado(int minutosParqueado){this.minutosParqueado = minutosParqueado;}
+    
+    public void setMinutosPagados(int minutosPagados){this.minutosPagados = minutosPagados;}
+    
+    private static Scanner input = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+       
+        
+        System.out.println("Ingrese el nombre del oficial: ");
+        String NombreOficial = input.nextLine();
+        System.out.println("Ingrese la placa del oficial");
+        String PlacaOficial = input.nextLine();
+        
+        OficialdePolicia Of = new OficialdePolicia(NombreOficial, PlacaOficial);
+        
+        System.out.println("Ingrese la marca del carro: ");
+        String marca = input.nextLine();
+        System.out.println("Ingrese el modelo del carro: ");
+        String modelo = input.nextLine();
+        System.out.println("Ingrese el color del carro: ");
+        String color = input.nextLine();
+        System.out.println("Ingrese la placa del carro: ");
+        String placa = input.nextLine();
+        
+        Boolean bandera = true;
+        while(bandera) {
+            System.out.println("ingrese los minutos que se quedo el carro parqueado: ");
+            int minutosParqueado = input.nextInt();
+            if (minutosParqueado < 0) {
+                System.out.println("Los minutos Pagados tienen que ser mayores a 0");
+            } else {
+                Of.setMinutosParqueado(minutosParqueado);
+                bandera = false;
+            } 
+        }
+        
+        
+        carroParqueado carro = new carroParqueado(marca, modelo, color, placa, Of.minutosParqueado);
+        
+        Boolean bandera_2 = true;
+        while(bandera_2) {
+            System.out.println("ingrese los minutos que se pagaron: ");
+            int minutosPagados = input.nextInt();
+            if (minutosPagados < 0) {
+                System.out.println("Los minutos Pagados tienen que ser mayores a 0");
+            } else {
+                Of.setMinutosPagados(minutosPagados);
+                bandera_2 = false;
+            } 
+        }
+        
+        Parquimetro par = new Parquimetro(Of.minutosPagados);
+        
+        Of.revisarCarro(carro, par);
+        
+    }
+    
+}
